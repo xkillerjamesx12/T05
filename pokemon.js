@@ -88,7 +88,7 @@ function pad(num, size) {
  }
  
  async function fetchPokemons() {
-     const response = await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=5")
+     const response = await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=20")
    .then(response => response.json())
    .then(data => {
        let results = data.results
