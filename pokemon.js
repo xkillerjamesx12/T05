@@ -5,31 +5,21 @@ function pad(num, size) {
   return num;
  }
  
- async function statusCheck(res) {
-   if (!res.ok) {
-     throw new Error(await res.text());
-   }
-   return res;
- }
- 
 
- async function fetchPokemon(url) {
+ async function fetchPokemon(url,div_p) {
   const response = await fetch(url)
   .then(response => response.json())
   .then(data => {
   
     //let div_p_ = document.getElementById('pokemon');
     let div_ = document.getElementById('pokemons')
-    let div_p = document.createElement("div");
-    div_p.setAttribute("id","pokemon");
-    div_.appendChild(div_p)
     
     let pokemonSprite = data.sprites.front_default;
     let pokemonName = data.name;
     let pokemonID = data.id;
     let pokemonType = data.types;
     
-    //console.log(pokemonID)
+    console.log(pokemonName)
     
     var p_id = document.createElement("p");
     p_id.setAttribute("id","pid");
@@ -94,12 +84,14 @@ function pad(num, size) {
        let results = data.results
      for (let i = 0; i < results.length; i++){
        //console.log(results.length)
-      //console.log(results[i].url)
-      //let div_ = document.getElementById('pokemons')
-      //let div_p = document.createElement("div");
-      //div_p.setAttribute("id","pokemon");
-      //div_.appendChild(div_p)
-      fetchPokemon(results[i].url);
+      //console.log("outside loop:") 
+      //console.log(results[i].name)
+      let div_ = document.getElementById('pokemons')
+      let div_p = document.createElement("div");
+      div_p.setAttribute("id","pokemon");
+      div_.appendChild(div_p)
+      
+      fetchPokemon(results[i].url,div_p);
      }
      })
    .catch(error => console.error('Error:', error));
